@@ -21,6 +21,7 @@ let dirH = 0;
 let esqB;
 let dirB;
 let jogou;
+let cancelou;
 
 function sleep(ms) {
     return new Promise((resolve) => {
@@ -68,6 +69,7 @@ class gameScene extends Phaser.Scene {
         dirH = 0;
         esqB = [0, 0];
         dirB = [0, 0];
+        cancelou = false;
 
         piecesValues[0] = [0, 9 / 12];
         piecesValues[1] = [2 / 2, 4 / 8];
@@ -199,6 +201,7 @@ class gameScene extends Phaser.Scene {
         this.textoScore.setVisible(true);
         this.textoScore.setOrigin(0.67, 0.8);
         this.aGrid.placeAtIndex(86, this.textoScore);
+
 
         this.textoScore2 = this.add.text(x, y, this.b1 + " - " + this.b2, {
             fontFamily: 'Quicksand',
@@ -791,20 +794,6 @@ class gameScene extends Phaser.Scene {
         else this.jogou = true;
     }
 
-
-    quantos(num, indexBot) {
-
-        for (let i = 0; i < piecesBots[indexBot].length; i++) {
-
-            if (piecesValues[num]) {
-
-            }
-
-
-        }
-
-    }
-
     soloBotHard(indexBot) {
 
         let listaOrd = [];
@@ -1192,6 +1181,15 @@ class gameScene extends Phaser.Scene {
                         this.disableInteractive();
                         while (lado.lado != "putRight" && lado.lado != "putLeft") {
                             await sleep(1000);
+
+                            if (cancelou) {
+                                this.rightSpotArrow.setVisible(false);
+                                this.leftSpotArrow.setVisible(false);
+                                this.enableInteractive();
+                                cancelou = false;
+                                return 0;
+                            }
+
                         }
                         this.enableInteractive();
                         // console.log("Peça escolhida=", lado);
@@ -1396,6 +1394,11 @@ class gameScene extends Phaser.Scene {
         this.aGrid.placeAtIndex(305, this.rightSpotArrow);
         this.rightSpotArrow.setScale(0.6);
 
+        this.cancela = this.add.image(0, 0, "cancelar");
+        this.aGrid.placeAtIndex(283, this.cancela);
+        this.cancela.setOrigin(0.5, 0.5);
+        this.cancela.setScale(0.6);
+
         this.leftSpotArrow.setVisible(true);
         this.rightSpotArrow.setVisible(true);
 
@@ -1406,8 +1409,21 @@ class gameScene extends Phaser.Scene {
                 lado.lado = "putLeft";
                 this.leftSpotArrow.setVisible(false);
                 this.rightSpotArrow.setVisible(false);
+                this.cancela.setVisible(false);
                 // rightSpotArrow.put = false;
                 //console.log("NO CHOOSESCENE : " + this.registry.get('putLeft') + this.registry.get('putRight'));
+            },
+            this
+        );
+
+        this.cancela.setInteractive({ useHandCursor: true });
+        this.cancela.on(
+            "pointerup",
+            function (pointer) {
+                cancelou = true;
+                this.leftSpotArrow.setVisible(false);
+                this.rightSpotArrow.setVisible(false);
+                this.cancela.setVisible(false);
             },
             this
         );
@@ -1421,6 +1437,15 @@ class gameScene extends Phaser.Scene {
             this.leftSpotArrow.displayWidth -= 5;
         });
 
+        this.cancela.on("pointerover", () => {
+            this.cancela.displayHeight += 5;
+            this.cancela.displayWidth += 5;
+        });
+        this.cancela.on("pointerout", () => {
+            this.cancela.displayHeight -= 5;
+            this.cancela.displayWidth -= 5;
+        });
+
         this.rightSpotArrow.setInteractive({ useHandCursor: true });
         this.rightSpotArrow.on(
             "pointerup",
@@ -1430,6 +1455,7 @@ class gameScene extends Phaser.Scene {
                 lado.lado = "putRight";
                 this.leftSpotArrow.setVisible(false);
                 this.rightSpotArrow.setVisible(false);
+                this.cancela.setVisible(false);
                 //this.registry.set('putLeft', false);
                 //this.registry.set('putRight', true);
                 //console.log("NO CHOOSESCENE : " + this.registry.get('putLeft') + this.registry.get('putRight'));

@@ -181,6 +181,11 @@ class endScene extends Phaser.Scene {
             this.voltaMenu.displayWidth -= 5;
         });
 
+        this.a1 = window.localStorage.getItem('a1');
+        this.a2 = window.localStorage.getItem("a2");
+        this.b1 = window.localStorage.getItem("b1");
+        this.b2 = window.localStorage.getItem("b2");
+
         this.voltaMenu.on('pointerup', function (pointer) {
             this.background.alpha = 0;
             this.tweens.add({

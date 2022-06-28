@@ -59,6 +59,7 @@ class preloadScene extends Phaser.Scene {
     // ---------- Game Scene ---------
     this.load.image("backgroundGame", "assets/menu/backgroundRound.png")
     this.load.image("btSkip", "assets/skip.png")
+    this.load.image("cancelar", "assets/cancelar.png")
     this.load.image("placeLeft", "assets/placeLeft.png")
     this.load.image("placeRight", "assets/placeRight.png")
 
