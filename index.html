@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<head>
+    <style>
+      html, body {
+          overflow: hidden;
+          height: 100%;
+          width: 100%;
+          margin: 0;
+        }
+
+      #game {
+          height: 100%;
+          width: 100%;
+          margin: 5;
+        }
+    </style>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0">
+    <meta name="HandheldFriendly" content="true" />
+    <title>Dómino de Frações - Jogos - Hypatiamat</title>
+
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon" />
+</head>
+
+<body style="background-color:#ffffff;">
+
+  <div id='game' style="background-color:#ffffff;"></div>
+    <script>
+      var PleaseRotateOptions = {
+          onlyMobile: true,
+          forcePortrait: false,
+          message: "Por Favor Rode o Ecrã",
+          subMessage: "(ou clique para continuar)",
+          allowClickBypass: true
+      }
+    </script>
+    <script src="src/pleaserotate.min.js"></script>
+    <script src="src/phaser.min.js"></script>
+    <script src="src/jquery-3.5.1.js"></script>
+
+    <script src="src/lib/AlignGrid.js"></script>
+    <script src="src/lib/doublyLinkedList.js"></script>
+    <script src="src/scenes/preloadScene.js"></script>
+    <script src="src/scenes/creditsScene.js"></script>
+    <script src="src/scenes/infoScene.js"></script>
+    <script src="src/scenes/startScene.js"></script>
+    <script src="src/scenes/preGameScene.js"></script>
+    <script src="src/scenes/gameScene.js"></script>
+    <script src="src/scenes/chooseScene.js"></script>
+    <script src="src/scenes/endScene.js"></script>
+    <script src="src/main.js"></script>
+  </div>
+
+</body>
+</html>
