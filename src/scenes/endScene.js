@@ -139,11 +139,11 @@ class endScene extends Phaser.Scene {
                 window.localStorage.setItem("a1", a_s);
 
 
-                let a2 = parseInt(window.localStorage.getItem('a1'));
+                let a2 = parseInt(window.localStorage.getItem('a2'));
                 a2++;
                 let a_s2 = a.toString();
 
-                window.localStorage.setItem("a1", a_s2);
+                window.localStorage.setItem("a2", a_s2);
 
             }
             else if (this.dificulty == 2) {
